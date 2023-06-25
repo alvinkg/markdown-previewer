@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Markdown Previewer</title>
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+        <!-- <script src="index.js"></script> -->
+        <script>
+
+            window.onload = function(){
+                loadDefaultText();
+                console.log('window loaded.')
+
+            }
+
+            function loadDefaultText(){
+                
+                let Text = 
+                `
+# Heading level 1
+## Heading level 2
+Link: This is my favorite search engine: [Duck Duck Go](https://duckduckgo.com "The best search engine for privacy").\n
+\`Use inline code in your Markdown file.\`\n
+    <html>
+        <head>
+        </head>
+    </html>
+List Items in Ordered List
+1. First item
+2. Second item
+3. Third item
+4. Fourth item
+
+> Dorothy followed her through many of the beautiful rooms in her castle.\n
+![The San Juan Mountains are beautiful!](https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080 "San Juan Mountains")
+I just love **bold text**.`;
+                // Load Text to element 'editor'
+                document.getElementById('editor').value = Text;
+                updatePreview();
+                console.log('default fn called.')
+            }
+
+            function updatePreview(){
+                let entry = document.getElementById('editor').value;
+                entry = ' " ' + entry + ' " '
+                // console.log('entry:',entry, typeof(entry));
+                markedUp = marked.parse(entry);
+                // console.log('marked:', markedUp);
+                document.getElementById('preview').innerHTML = marked.parse(document.getElementById('editor').value);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col text-center bg-success">
+                    <h1>Markdown Previewer</h1>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-6 bg-info">
+                    <h2>Editor</h2>
+                    <textarea id="editor" onkeyup="updatePreview()">
+                        
+                    </textarea>
+                    
+                </div>
+                
+                <div class="col-6 bg-warning">
+                    <h2>Preview</h2>
+                    <div id="preview">
+            
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    </body>
+</html>
